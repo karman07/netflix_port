@@ -13,17 +13,16 @@ export default function Personal() {
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setIsVisible(true);
-    } else {
+    if (!storedName) {
       setShowDialog(true);
     }
+    // Always show content after a short delay
+    setTimeout(() => setIsVisible(true), 100);
   }, []);
 
   const handleNameSubmit = (name: string) => {
     localStorage.setItem('userName', name);
     setShowDialog(false);
-    setTimeout(() => setIsVisible(true), 100);
   };
 
   const timeline = [
