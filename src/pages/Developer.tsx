@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { NETFLIX_COLORS } from '@/constants/colors';
+import NameDialog from '@/components/NameDialog';
 import meeImg from '@/assets/mee.jpg';
 import intelliumImg from '@/assets/intellium.png';
 import techlambdaImg from '@/assets/techlambda.jpg';
@@ -22,6 +23,23 @@ import principlesConclaveImg from '@/assets/principles_conclave.png';
 export default function Developer() {
   const navigate = useNavigate();
   const [selectedModal, setSelectedModal] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [showDialog, setShowDialog] = useState(false);
+
+  useEffect(() => {
+    const storedName = localStorage.getItem('userName');
+    if (storedName) {
+      setUserName(storedName);
+    } else {
+      setShowDialog(true);
+    }
+  }, []);
+
+  const handleNameSubmit = (name: string) => {
+    setUserName(name);
+    localStorage.setItem('userName', name);
+    setShowDialog(false);
+  };
 
   const experiences = [
     {
@@ -210,6 +228,8 @@ export default function Developer() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {showDialog && <NameDialog onSubmit={handleNameSubmit} />}
+      
       {/* Netflix Navigation */}
       <nav className="fixed top-0 w-full z-40 bg-black/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
