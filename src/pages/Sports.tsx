@@ -6,20 +6,16 @@ import NameDialog from '@/components/NameDialog';
 
 export default function Sports() {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setUserName(storedName);
-    } else {
+    if (!storedName) {
       setShowDialog(true);
     }
   }, []);
 
   const handleNameSubmit = (name: string) => {
-    setUserName(name);
     localStorage.setItem('userName', name);
     setShowDialog(false);
   };

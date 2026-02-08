@@ -23,20 +23,16 @@ import principlesConclaveImg from '@/assets/principles_conclave.png';
 export default function Developer() {
   const navigate = useNavigate();
   const [selectedModal, setSelectedModal] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setUserName(storedName);
-    } else {
+    if (!storedName) {
       setShowDialog(true);
     }
   }, []);
 
   const handleNameSubmit = (name: string) => {
-    setUserName(name);
     localStorage.setItem('userName', name);
     setShowDialog(false);
   };
@@ -302,7 +298,7 @@ export default function Developer() {
             Work Experience
           </h2>
           <div className="flex space-x-4 overflow-x-auto pb-4">
-            {experiences.map((exp, index) => (
+            {experiences.map((exp) => (
               <motion.div
                 key={exp.id}
                 whileHover={{ scale: 1.05 }}

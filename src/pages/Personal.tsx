@@ -7,7 +7,6 @@ import NameDialog from '@/components/NameDialog';
 export default function Personal() {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [userName, setUserName] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
   const codingYears = new Date().getFullYear() - 2020;
   const chessYears = new Date().getFullYear() - 2017;
@@ -15,7 +14,6 @@ export default function Personal() {
   useEffect(() => {
     const storedName = localStorage.getItem('userName');
     if (storedName) {
-      setUserName(storedName);
       setIsVisible(true);
     } else {
       setShowDialog(true);
@@ -23,7 +21,6 @@ export default function Personal() {
   }, []);
 
   const handleNameSubmit = (name: string) => {
-    setUserName(name);
     localStorage.setItem('userName', name);
     setShowDialog(false);
     setTimeout(() => setIsVisible(true), 100);
