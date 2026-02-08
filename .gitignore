@@ -7,8 +7,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Lock files (pnpm-lock.yaml is the main one)
-package-lock.json
+# Lock files
+pnpm-lock.yaml
+yarn.lock
 
 node_modules
 dist
