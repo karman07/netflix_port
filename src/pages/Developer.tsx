@@ -37,6 +37,7 @@ export default function Developer() {
     setShowDialog(false);
   };
 
+  //
   const experiences = [
     {
       id: 'intellinum',
